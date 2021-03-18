@@ -10,8 +10,6 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,8 +55,8 @@ public class ProgressTrackerController {
 	}
 
 	/**
-	 * Extracts JSession id from request, if not request id is present one is
-	 * created. The session id is user to correlate user progress across requests.
+	 * Extracts session id from request, if no request id is present one is created.
+	 * The session id is user to correlate user progress across requests.
 	 * 
 	 * @param request
 	 * @return
@@ -89,8 +87,4 @@ public class ProgressTrackerController {
 		return jsonData;
 	}
 
-	@ExceptionHandler
-	public ResponseEntity<String> clientExceptionHandler(ClientException e) {
-		return ResponseEntity.badRequest().body(e.getMessage());
-	}
 }

@@ -7,6 +7,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+
+import com.vladmihalcea.hibernate.type.json.JsonBlobType;
+
 /**
  * Class representation for information to be tracked about user.
  * 
@@ -14,6 +19,10 @@ import javax.persistence.SequenceGenerator;
  *
  */
 @Entity
+@TypeDef(
+	    name = "json",
+	    typeClass = JsonBlobType.class
+	)
 public class ProgressData {
 	@Id
 	@GeneratedValue(generator = "progress_data_id_generator")
@@ -39,6 +48,7 @@ public class ProgressData {
 	/**
 	 * Blob of unstructured header data stored in JSON format about the user. 
 	 */
+	@Type(type="json")
 	private String jsonData;
 
 	ProgressData() {

@@ -24,11 +24,11 @@ public class ProgressService {
 		this.registeredDomainRepo = registeredDomainRepo;
 	}
 
-	public boolean saveTrackingInfo(String labId, String stepId, String sessionId, ObjectNode jsonData) {
-		isDomainRegistered(jsonData);
-		ProgressData data = new ProgressData(labId, stepId, sessionId, jsonData.toString());
-		progressRepo.save(data);
-		return true;
+	public void saveTrackingInfo(String labId, String stepId, String sessionId, ObjectNode jsonData) {
+		if (isDomainRegistered(jsonData)) {
+			ProgressData data = new ProgressData(labId, stepId, sessionId, jsonData.toString());
+			progressRepo.save(data);
+		}
 	}
 
 	/**
@@ -36,12 +36,14 @@ public class ProgressService {
 	 * 
 	 * @param jsonData
 	 */
-	private void isDomainRegistered(ObjectNode jsonData) {
+	private boolean isDomainRegistered(ObjectNode jsonData) {
 		String hostName = jsonData.get("host").asText();
 		LOGGER.debug("Request host: " + hostName);
 		if (registeredDomainRepo.findByDomainHost(hostName).isEmpty()) {
-			throw new ClientException("Domain isn't registered");
+			LOGGER.warn("Domain: " + hostName + " is not registered. Tracking data will not be saved.");
+			return false;
 		}
+		return true;
 	}
 
 }
