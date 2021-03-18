@@ -41,8 +41,6 @@ public class TestApplicationSecurity {
 	private ObjectMapper mapper;
 	@MockBean
 	private ProgressRepo progressRepo;
-	@MockBean
-	private RegisteredDomainRepo domainRepo;
 
 	@AfterEach
 	public void cleanup() {

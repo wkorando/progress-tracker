@@ -17,33 +17,15 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 public class ProgressService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ProgressService.class);
 	private ProgressRepo progressRepo;
-	private RegisteredDomainRepo registeredDomainRepo;
 
-	public ProgressService(ProgressRepo progressRepo, RegisteredDomainRepo registeredDomainRepo) {
+	public ProgressService(ProgressRepo progressRepo) {
 		this.progressRepo = progressRepo;
-		this.registeredDomainRepo = registeredDomainRepo;
+
 	}
 
 	public void saveTrackingInfo(String labId, String stepId, String sessionId, ObjectNode jsonData) {
-		if (isDomainRegistered(jsonData)) {
-			ProgressData data = new ProgressData(labId, stepId, sessionId, jsonData.toString());
-			progressRepo.save(data);
-		}
-	}
-
-	/**
-	 * Verifies the request origin is from a registered domain.
-	 * 
-	 * @param jsonData
-	 */
-	private boolean isDomainRegistered(ObjectNode jsonData) {
-		String hostName = jsonData.get("host").asText();
-		LOGGER.debug("Request host: " + hostName);
-		if (registeredDomainRepo.findByDomainHost(hostName).isEmpty()) {
-			LOGGER.warn("Domain: " + hostName + " is not registered. Tracking data will not be saved.");
-			return false;
-		}
-		return true;
+		ProgressData data = new ProgressData(labId, stepId, sessionId, jsonData.toString());
+		progressRepo.save(data);
 	}
 
 }
