@@ -22,13 +22,9 @@ public class TestProgressService {
 	@Test
 	public void testReceiveValidTrackingData(@Mock ProgressRepo progressRepo) {
 		ProgressService service = new ProgressService(progressRepo);
-		String HOST_NAME = "registeredDomain.com";
 		ObjectNode mockNode = Mockito.mock(ObjectNode.class);
-		JsonNode mockHostNode = Mockito.mock(JsonNode.class);
 
 		when(mockNode.toString()).thenReturn("{}");
-		when(mockNode.get("host")).thenReturn(mockHostNode);
-		when(mockHostNode.asText()).thenReturn(HOST_NAME);
 
 		service.saveTrackingInfo("labId", "1", "12345", mockNode);
 
