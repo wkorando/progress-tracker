@@ -48,6 +48,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags:  ${{ secrets.ORACLE_TENANCY }}/progress-tracker:latest
+          tags:  ${{ secrets.ORACLE_TENANCY }}/devrel/progress-tracker:latest
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
