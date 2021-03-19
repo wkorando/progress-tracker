@@ -1,5 +1,5 @@
 FROM openjdk:16-oraclelinux7
 
-COPY *.jar /app
+COPY progress-tracker-app.jar /app
 
-CMD ["java", "-jar", "/app/*.jar"] 
+CMD ["java", "-jar", "/app/progress-tracker-app*.jar"] 
