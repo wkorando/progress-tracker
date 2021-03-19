@@ -48,6 +48,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags:  phx.ocir.io/jpginfra/devrel/progress-tracker:latest
+          tags:  phx.ocir.io/jpginfra/progress-tracker:latest
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
