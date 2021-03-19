@@ -24,7 +24,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: java_artifact
-        path: target/*.jar
+        path: target/progress-tracker-app.jar
   docker:
     needs: build
     runs-on: ubuntu-latest
