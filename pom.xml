@@ -109,7 +109,7 @@
 		<repository>
 			<id>github</id>
 			<name>GitHub OWNER Apache Maven Packages</name>
-			<url>https://maven.pkg.github.com/wkorando/progress-tracker-app</url>
+			<url>https://maven.pkg.github.com/wkorando/progress-tracker</url>
 		</repository>
 	</distributionManagement>
 
