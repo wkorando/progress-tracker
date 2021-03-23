@@ -47,6 +47,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/progress-tracker:latest ${{ secrets.DOCKERHUB_USERNAME }}/progress-tracker:${{ steps.date.outputs.date }}-${{ GITHUB_RUN_NUMBER }} 
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/progress-tracker:latest ${{ secrets.DOCKERHUB_USERNAME }}/progress-tracker:${{ steps.date.outputs.date }}-${{ steps.buildnumber.outputs.build_number }}
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
