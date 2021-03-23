@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.bk.progress-tracker</groupId>
 	<artifactId>progress-tracker</artifactId>
-	<version>1.0.0-RELEASE</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<name>progress-tracker</name>
 	<description>Project for tracking user progress through workshop content</description>
 	<properties>
@@ -104,13 +104,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
-	<distributionManagement>
-		<repository>
-			<id>github</id>
-			<name>GitHub OWNER Apache Maven Packages</name>
-			<url>https://maven.pkg.github.com/wkorando/progress-tracker</url>
-		</repository>
-	</distributionManagement>
-
 </project>
