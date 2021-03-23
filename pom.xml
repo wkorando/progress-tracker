@@ -18,6 +18,8 @@
 		<java.version>16</java.version>
 	</properties>
 	<dependencies>
+	
+		<!-- Spring Libraries -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -39,7 +41,7 @@
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 
-
+		<!-- Third Party Libraries -->
 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>bootstrap</artifactId>
@@ -66,10 +68,11 @@
 			<version>19.3.0.0</version>
 		</dependency>
 
+		<!-- Test Libraries -->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<!-- <scope>test</scope> -->
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.testcontainers</groupId>
@@ -104,4 +107,12 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<distributionManagement>
+		<repository>
+			<id>github</id>
+			<name>GitHub OWNER Apache Maven Packages</name>
+			<url>https://maven.pkg.github.com/wkorando/${artifactId}</url>
+		</repository>
+	</distributionManagement>
 </project>
