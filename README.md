@@ -20,7 +20,7 @@ JVM args:
 ```
 --spring.datasource.username=[db-username] 
 --spring.datasource.password=[db-password]
---spring.datasource.url=jdbc:oracle:thin:@protrackdb_medium?TNS_ADMIN=[walletLocation]
+--spring.datasource.url=jdbc:oracle:thin:@[connection_name]?TNS_ADMIN=[walletLocation]
 ```
 
 

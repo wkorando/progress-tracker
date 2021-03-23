@@ -19,14 +19,14 @@ jobs:
       with:
         java-version: 16
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      run: mvn deploy
     - name: Upload Java artifact
       uses: actions/upload-artifact@v2
       with:
         name: java_artifact
         path: target/*.jar
     - name: Publish Java artifact
-      run: mvn deploy -Dregistry=https://maven.pkg.github.com/wkorando -Dtoken=$GH_TOKEN
+      run: 
   docker:
     needs: build
     runs-on: ubuntu-latest
@@ -39,17 +39,16 @@ jobs:
         uses: docker/setup-qemu-action@v1
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
-      - name: Login to OCI
+      - name: Login to Docker Hub
         uses: docker/login-action@v1 
         with:
-          registry: phx.ocir.io
-          username: ${{ secrets.ORACLE_CR_USERNAME }}
-          password: ${{ secrets.ORACLE_CR_TOKEN }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags:  phx.ocir.io/jpginfra/progress-tracker:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/progress-tracker:latest ${{ secrets.DOCKERHUB_USERNAME }}/progress-tracker:${{ steps.date.outputs.date }}-${{ GITHUB_RUN_NUMBER }} 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
