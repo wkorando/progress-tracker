@@ -19,7 +19,7 @@ jobs:
       with:
         java-version: 16
     - name: Build with Maven
-      run: mvn deploy -Dtoken=${{ GITHUB_TOKEN }}
+      run: mvn deploy -Dtoken=${{ secrets.GITHUB_TOKEN }}
     - name: Upload Java artifact
       uses: actions/upload-artifact@v2
       with:
