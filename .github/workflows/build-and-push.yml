@@ -25,8 +25,6 @@ jobs:
       with:
         name: java_artifact
         path: target/*.jar
-    - name: Publish Java artifact
-      run: 
   docker:
     needs: build
     runs-on: ubuntu-latest
