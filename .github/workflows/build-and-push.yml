@@ -19,12 +19,14 @@ jobs:
       with:
         java-version: 16
     - name: Build with Maven
-      run: mvn -B install --file pom.xml
+      run: mvn -B package --file pom.xml
     - name: Upload Java artifact
       uses: actions/upload-artifact@v2
       with:
         name: java_artifact
         path: target/*.jar
+    - name: Publish Java artifact
+      run: mvn deploy -Dregistry=https://maven.pkg.github.com/wkorando -Dtoken=$GH_TOKEN
   docker:
     needs: build
     runs-on: ubuntu-latest
