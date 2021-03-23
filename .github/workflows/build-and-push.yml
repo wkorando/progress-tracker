@@ -19,7 +19,9 @@ jobs:
       with:
         java-version: 16
     - name: Build with Maven
-      run: mvn deploy -Dregistry=https://maven.pkg.github.com/wkorando -Dtoken=${{ secrets.GITHUB_TOKEN }}
+      run: mvn --batch_mode deploy
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Upload Java artifact
       uses: actions/upload-artifact@v2
       with:

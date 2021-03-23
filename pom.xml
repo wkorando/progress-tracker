@@ -17,8 +17,9 @@
 	<properties>
 		<java.version>16</java.version>
 	</properties>
-	<dependencies>
 	
+	<dependencies>
+
 		<!-- Spring Libraries -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -99,7 +100,6 @@
 	</dependencies>
 
 	<build>
-		<finalName>progress-tracker-app</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
