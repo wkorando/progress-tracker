@@ -1,5 +1,7 @@
 package com.bk.progresstracker;
 
+import java.time.LocalDateTime;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,11 @@ public class ProgressService {
 	public void saveTrackingInfo(String labId, String stepId, String sessionId, ObjectNode jsonData) {
 		ProgressData data = new ProgressData(labId, stepId, sessionId, jsonData.toString());
 		progressRepo.save(data);
+	}
+
+	public Iterable<ProgressData> findAllTrackingForDay(LocalDateTime endDate) {
+		LocalDateTime startDate = LocalDateTime.from(endDate).minusDays(1);
+		return progressRepo.findByTimestampBetweenOrderByTimestampDesc(startDate, endDate);
 	}
 
 }

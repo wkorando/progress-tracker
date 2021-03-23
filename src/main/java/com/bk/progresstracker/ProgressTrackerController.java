@@ -2,6 +2,8 @@ package com.bk.progresstracker;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +12,7 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,6 +55,12 @@ public class ProgressTrackerController {
 		service.saveTrackingInfo(labId, stepId, sessionId, jsonData);
 		InputStream in = getClass().getResourceAsStream("/static/pixel.png");
 		return IOUtils.toByteArray(in);
+	}
+
+	@GetMapping("/index")
+	public String showUserList(Model model) {
+		model.addAttribute("progressDatas", service.findAllTrackingForDay(LocalDateTime.now(ZoneId.of("UTC"))));
+		return "index";
 	}
 
 	/**

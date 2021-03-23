@@ -1,7 +1,11 @@
 package com.bk.progresstracker;
 
-import org.springframework.data.repository.CrudRepository;
+import java.time.LocalDateTime;
 
-public interface ProgressRepo extends CrudRepository<ProgressData, Long> {
- 
+import org.springframework.data.repository.PagingAndSortingRepository;
+
+public interface ProgressRepo extends PagingAndSortingRepository<ProgressData, Long> {
+
+	Iterable<ProgressData> findByTimestampBetweenOrderByTimestampDesc(LocalDateTime startDate, LocalDateTime endDate);
+
 }

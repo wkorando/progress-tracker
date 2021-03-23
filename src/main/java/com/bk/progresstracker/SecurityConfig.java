@@ -9,7 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers(HttpMethod.GET, "/p/**", "/actuator/health")
-				.permitAll().anyRequest().denyAll();
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/actuator/health").permitAll()
+				.antMatchers(HttpMethod.GET, "/actuator/**").authenticated().anyRequest().permitAll();
 	}
 }

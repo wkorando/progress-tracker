@@ -1,5 +1,8 @@
 package com.bk.progresstracker;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -44,7 +47,7 @@ public class ProgressData {
 	/**
 	 * Time in UTC when the request was received by the service
 	 */
-	private Date timestamp = new Date();
+	private LocalDateTime  timestamp = LocalDateTime.now(ZoneId.of("UTC"));
 	/**
 	 * Blob of unstructured header data stored in JSON format about the user. 
 	 */
@@ -77,7 +80,7 @@ public class ProgressData {
 		return trackingId;
 	}
 
-	public Date getTimestamp() {
+	public LocalDateTime getTimestamp() {
 		return timestamp;
 	}
 

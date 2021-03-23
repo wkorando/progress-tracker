@@ -3,26 +3,17 @@ package com.bk.progresstracker;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.TimeZone;
 
 import org.junit.BeforeClass;
-import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
-import org.junit.jupiter.api.extension.RegisterExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.util.TestPropertyValues;
-import org.springframework.context.ApplicationContextInitializer;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.testcontainers.containers.OracleContainer;
 
 @DataJpaTest(properties = { "spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.OracleDialect",
-		"spring.jpa.hibernate.ddl=create", 
-		"spring.jpa.properties.javax.persistence.validation.mode=none"})
+		"spring.jpa.hibernate.ddl=create", "spring.jpa.properties.javax.persistence.validation.mode=none" })
 public class TestProgressRepo {
 
 	@Autowired
@@ -43,7 +34,6 @@ public class TestProgressRepo {
 	private final String TRACKING_ID = "C11438D9AE56178D8821B7F0058B51F1";
 	private final String LAB_ID = "test-id";
 	private final String STEP_ID = "1";
-	private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 	@BeforeClass
 	public void setup() {
@@ -54,18 +44,16 @@ public class TestProgressRepo {
 	public void testPersistingRecord() {
 
 		ProgressData data = new ProgressData(LAB_ID, STEP_ID, TRACKING_ID, JSON_DATA);
-		Date testTimeStamp = new Date();
 		System.out.println(repo.save(data));
 		ProgressData updateData = repo.findById(10L).get();
-		
-		String formattedRetrievedTimestamp = simpleDateFormat.format(data.getTimestamp());
-		String formattedTestTimestamp = simpleDateFormat.format(testTimeStamp);
+
+		LocalDate today = LocalDate.now(ZoneId.of("UTC"));
 
 		assertAll(() -> assertThat(updateData.getLabId()).isEqualTo(LAB_ID),
 				() -> assertThat(updateData.getStepId()).isEqualTo(STEP_ID),
 				() -> assertThat(updateData.getTrackingId()).isEqualTo(TRACKING_ID),
 				() -> assertThat(updateData.getJsonData()).isEqualTo(JSON_DATA),
-				() -> assertThat(formattedTestTimestamp).isEqualTo(formattedRetrievedTimestamp));
+				() -> assertThat(updateData.getTimestamp().toLocalDate()).isEqualTo(today));
 	}
 
 }

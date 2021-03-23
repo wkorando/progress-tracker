@@ -74,20 +74,4 @@ public class TestApplicationSecurity {
 		assertThat(result.getResponse().getStatus()).isNotEqualTo(401);
 	}
 
-	/**
-	 * Will generate a random url with every execution to verify only urls with
-	 * /p/** are accepted.
-	 * 
-	 * @throws Exception
-	 */
-	@Test
-	public void testRejectRequestUnauthorizedUrl() throws Exception {
-		Generex generex = new Generex("[a-o]|[q-z]/[a-z]{1,10}/[0-9]{1,2}");
-		String unauthorizedUrl = "/" + generex.random();
-		LOGGER.info("Generated url being called: " + unauthorizedUrl);
-		mockMvc.perform(MockMvcRequestBuilders.get(unauthorizedUrl))//
-				.andExpect(status().isForbidden())//
-				.andReturn();
-	}
-
 }
