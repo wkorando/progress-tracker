@@ -1,6 +1,7 @@
 package com.bk.progresstracker;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +34,20 @@ public class ProgressService {
 	public Iterable<ProgressData> findAllTrackingForDay(LocalDateTime endDate) {
 		LocalDateTime startDate = LocalDateTime.from(endDate).minusDays(1);
 		return progressRepo.findByTimestampBetweenOrderByTimestampDesc(startDate, endDate);
+	}
+
+	public Iterable<ProgressData> findAllTrackingForDayAndGroupByTrackingId(LocalDateTime endDate) {
+		LocalDateTime startDate = LocalDateTime.from(endDate).minusDays(1);
+		return progressRepo.findByTimestampBetweenOrderByTrackingIdDescTimestampDesc(startDate, endDate);
+	}
+
+	public Iterable<ProgressData> findMostRecentUserActivity(LocalDateTime endDate) {
+		LocalDateTime startDate = LocalDateTime.from(endDate).minusDays(1);
+		Iterable<ProgressData> progressData = progressRepo.findByTimestampBetweenOrderByTimestampAsc(startDate, endDate);
+		HashMap<String, ProgressData> progressDataTable = new HashMap<>();
+		progressData.forEach(p -> progressDataTable.put(p.getTrackingId(), p));
+		
+		return progressDataTable.values();
 	}
 
 }

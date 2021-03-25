@@ -18,10 +18,27 @@ public class ViewDataController {
 		this.service = service;
 	}
 
-	@GetMapping("/progress-data")
-	public String displayProgessDataForPastDay(Model model) {
+	@GetMapping("/progress-data-all")
+	public String displayAllProgessDataForPastDay(Model model) {
 		model.addAttribute("progressDatas", service.findAllTrackingForDay(LocalDateTime.now(ZoneId.of("UTC"))));
 		return "progress-data";
 	}
+	
+	
+	@GetMapping("/progress-data-group-by-user")
+	public String displayAllProgessDataForPastDayGroupByUser(Model model) {
+		model.addAttribute("progressDatas", service.findAllTrackingForDayAndGroupByTrackingId(LocalDateTime.now(ZoneId.of("UTC"))));
+		return "progress-data";
+	}
+	
+	
+	@GetMapping("/progress-data-recent-activity")
+	public String displayMostRecentProgessDataByUserForPastDay(Model model) {
+		model.addAttribute("progressDatas", service.findMostRecentUserActivity(LocalDateTime.now(ZoneId.of("UTC"))));
+		return "progress-data";
+	}
+	
+	
+	
 
 }

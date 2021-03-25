@@ -14,7 +14,6 @@
 			<table class="table table-bordered" style="width: 100%">
 				<thead>
 					<tr>
-						<th>Lab Id</th>
 						<th>Step Id</th>
 						<th>Tracking Id</th>
 						<th>Timestamp</th>
@@ -22,10 +21,9 @@
 				</thead>
 				<tbody>
 					<tr th:each="progressData : ${progressDatas}">
-						<td th:text="${progressData.labId}"></td>
 						<td th:text="${progressData.stepId}"></td>
 						<td th:text="${progressData.trackingId}"></td>
-						<td th:text="${progressData.timestamp}"></td>
+						<td th:text="${#temporals.format(progressData.timestamp, 'HH:mm')}"></td>
 					</tr>
 				</tbody>
 			</table>

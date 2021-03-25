@@ -57,12 +57,6 @@ public class ProgressTrackerController {
 		return IOUtils.toByteArray(in);
 	}
 
-	@GetMapping("/index")
-	public String showUserList(Model model) {
-		model.addAttribute("progressDatas", service.findAllTrackingForDay(LocalDateTime.now(ZoneId.of("UTC"))));
-		return "index";
-	}
-
 	/**
 	 * Extracts session id from request, if no request id is present one is created.
 	 * The session id is user to correlate user progress across requests.
