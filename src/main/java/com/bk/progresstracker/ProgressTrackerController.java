@@ -39,9 +39,8 @@ public class ProgressTrackerController {
 	 * @param stepId  - the step within the lab the user is currently on should be
 	 *                numberic
 	 * @param request - HttpServletRequest
-	 * @return
-	 * @throws IOException -
-	 * @throws Exception
+	 * @return - Return pixel image
+	 * @throws IOException - If an error occurs, should never happen unless /static/pixel.png has been misplaced. 
 	 */
 	@GetMapping(value = "/{labId}/{stepId}", produces = MediaType.IMAGE_PNG_VALUE)
 	public @ResponseBody byte[] receiveTrackingData(@PathVariable String labId, @PathVariable String stepId,

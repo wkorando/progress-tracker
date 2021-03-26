@@ -54,7 +54,6 @@ public class TestApplicationSecurity {
 
 		mockMvc.perform(MockMvcRequestBuilders.get("/p/test-lab/1"))//
 				.andExpect(status().isOk())//
-				.andExpect(content().contentType(MediaType.IMAGE_PNG))//
 				.andReturn();
 	}
 

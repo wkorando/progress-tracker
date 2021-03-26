@@ -1,5 +1,5 @@
 FROM openjdk:16-oraclelinux7
 
-COPY *.jar /run
+COPY target/*.jar /run
 
 CMD ["java", "-jar", "/run/*.jar"] 

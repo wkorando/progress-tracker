@@ -1,19 +1,13 @@
 package com.bk.progresstracker;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.SequenceGenerator;
-
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
-
-import com.vladmihalcea.hibernate.type.json.JsonBlobType;
 
 /**
  * Class representation for information to be tracked about user.
@@ -22,10 +16,6 @@ import com.vladmihalcea.hibernate.type.json.JsonBlobType;
  *
  */
 @Entity
-@TypeDef(
-	    name = "json",
-	    typeClass = JsonBlobType.class
-	)
 public class ProgressData {
 	@Id
 	@GeneratedValue(generator = "progress_data_id_generator")
@@ -47,11 +37,11 @@ public class ProgressData {
 	/**
 	 * Time in UTC when the request was received by the service
 	 */
-	private LocalDateTime  timestamp = LocalDateTime.now(ZoneId.of("UTC"));
+	private LocalDateTime timestamp = LocalDateTime.now(ZoneId.of("UTC"));
 	/**
-	 * Blob of unstructured header data stored in JSON format about the user. 
+	 * Blob of unstructured header data stored in JSON format about the user.
 	 */
-	@Type(type="json")
+	@Lob
 	private String jsonData;
 
 	ProgressData() {
