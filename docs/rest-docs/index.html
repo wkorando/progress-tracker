@@ -443,7 +443,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h1 id="overview" class="sect0">Overview</h1>
 <div class="openblock partintro">
 <div class="content">
-Pixel tracking application. Workshop can make requests to track a user&#8217;s progress through a multi-step workshop.
+<div class="paragraph">
+<p>Pixel tracking application. Workshop can make requests to track a user&#8217;s progress through a multi-step workshop.</p>
+</div>
+<div class="paragraph">
+<p>Application does require cookies to be enabled. A JSessionID is generated and stored as a cookie a way of correlating requests from a user during a session.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -469,11 +474,11 @@ Pixel tracking application. Workshop can make requests to track a user&#8217;s p
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>labId</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">String value for identifying a lab.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Should be human readable lab id. Example: if you have a workshop for deploying Java applications on Kubernetes, a lab id could be: <code>java-on-k8s</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>stepId</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">String value for identifying the step within the lab the attendee is currently on.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The step within the lab the user is on. Recommend this be a numeric value, but is stored as a String.</p></td>
 </tr>
 </tbody>
 </table>
@@ -497,7 +502,7 @@ Pixel tracking application. Workshop can make requests to track a user&#8217;s p
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-03-29 23:11:44 UTC
+Last updated 2021-03-29 23:48:37 UTC
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/github.min.css">
