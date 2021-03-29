@@ -28,7 +28,7 @@ jobs:
     - name: Upload Target Folder
       uses: actions/upload-artifact@v2
       with:
-        name: target
+        name: target_folder
         path: target
     - name: Upload Artifact Version
       uses: actions/upload-artifact@v2
@@ -42,7 +42,10 @@ jobs:
       - name: Download Target Folder
         uses: actions/download-artifact@v2
         with:
-          name: target
+          name: target_folder
+      - name: Move target folder to root
+        shell: bash
+        run: mv target_folder/target .
       - name: Download Artifact Version
         uses: actions/download-artifact@v1
         with:
