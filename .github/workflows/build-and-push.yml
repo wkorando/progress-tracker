@@ -30,8 +30,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Move generated docs into repo
       run: |
-	rm -rf docs
-	mkdir docs
+        rm -rf docs
+        :wqmkdir docs
         mv -f target/generated-docs docs/rest-docs
         mv -f target/site/apidocs docs/javadoc
         git add .
