@@ -34,7 +34,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: artifact_version
-        path: metadata/version.txt
+        path: version.txt
   docker:
     needs: build
     runs-on: ubuntu-latest
@@ -43,14 +43,14 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: target_folder
-      - name: Download metadata
+      - name: Download Artifact Version
         uses: actions/download-artifact@v1
         with:
           name: artifact_version
       - name: Create version environment variable
         shell: bash
         run: |
-          value=`cat metadata/version.txt`
+          value=`cat version.txt`
           echo ::set-output name=version::$value
         id: project
       - name: Set up QEMU
