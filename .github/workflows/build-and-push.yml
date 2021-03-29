@@ -24,7 +24,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Extract Maven project version
       shell: bash
-      run: echo $(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec) | sed 's/-//g' > version.txt
+      run: echo $(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec) > version.txt
     - name: Upload Target Folder
       uses: actions/upload-artifact@v2
       with:
@@ -68,6 +68,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/progress-tracker:latest ${{ secrets.DOCKERHUB_USERNAME }}/progress-tracker:${{ steps.project.outputs.version }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/progress-tracker:latest,${{ secrets.DOCKERHUB_USERNAME }}/progress-tracker:${{ steps.project.outputs.version }}
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
