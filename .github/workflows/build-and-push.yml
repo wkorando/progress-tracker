@@ -32,7 +32,6 @@ jobs:
       run: echo $(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec) > version.txt
     - name: Move generated docs into repo
       run: |
-        ls -al
         mv -f target/generated-docs docs/rest-docs
         mv -f target/site/apidocs docs/javadoc
     - name: Commit files
