@@ -86,12 +86,13 @@ jobs:
           name: target_folder
       - uses: actions/checkout@v2
         with:
-          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
-          fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
-      - name: Create local changes
+          persist-credentials: false 
+          fetch-depth: 0 
+      - name: Move generated docs into repo
         run: |
-          mv -f target_folder/generated-docs docs/rest-docs
-          mv -f target_folder/site/apidocs docs/javadoc
+	  ls -al
+          mv -f generated-docs docs/rest-docs
+          mv -f site/apidocs docs/javadoc
       - name: Commit files
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
