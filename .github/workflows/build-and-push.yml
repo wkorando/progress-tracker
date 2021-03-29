@@ -90,8 +90,8 @@ jobs:
           fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
       - name: Create local changes
         run: |
-          mv -f generated-docs docs/rest-docs
-          mv -f target/site/apidocs docs/javadoc
+          mv -f target_folder/generated-docs docs/rest-docs
+          mv -f target_folder/site/apidocs docs/javadoc
       - name: Commit files
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
