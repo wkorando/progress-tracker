@@ -90,7 +90,7 @@ jobs:
           fetch-depth: 0 
       - name: Move generated docs into repo
         run: |
-	  ls -al
+          ls -al
           mv -f generated-docs docs/rest-docs
           mv -f site/apidocs docs/javadoc
       - name: Commit files
