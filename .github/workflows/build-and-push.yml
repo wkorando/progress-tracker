@@ -6,6 +6,8 @@ name: Java CI with Maven and push to Container Repo
 on:
   push:
     branches: [ main ]
+    paths-ignore:
+    - 'docs/**'
   pull_request:
     branches: [ main ]
 
@@ -45,7 +47,7 @@ jobs:
           name: target_folder
       - name: Move target folder to root
         shell: bash
-        run: ls -al; mv target_folder/target .
+        run: mkdir target; mv *.jar target/
       - name: Download Artifact Version
         uses: actions/download-artifact@v1
         with:
@@ -74,3 +76,29 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/progress-tracker:latest,${{ secrets.DOCKERHUB_USERNAME }}/progress-tracker:${{ steps.project.outputs.version }}
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
+  docs:
+    needs: add-generated-documentation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Target Folder
+        uses: actions/download-artifact@v2
+        with:
+          name: target_folder
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+          fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
+      - name: Create local changes
+        run: |
+	  mv -f generated-docs docs/rest-docs
+	  mv -f target/site/apidocs docs/javadoc
+      - name: Commit files
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -m "Updating generated documentation" -a
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
