@@ -24,7 +24,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Extract Maven project version
       shell: bash
-      run: echo $(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec) > version.txt
+      run: echo $(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec) | sed 's/-//g' > version.txt
     - name: Upload Target Folder
       uses: actions/upload-artifact@v2
       with:
