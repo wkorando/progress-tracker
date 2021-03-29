@@ -45,7 +45,7 @@ jobs:
           name: target_folder
       - name: Move target folder to root
         shell: bash
-        run: mv target_folder/target .
+        run: ls -al; mv target_folder/target .
       - name: Download Artifact Version
         uses: actions/download-artifact@v1
         with:
