@@ -69,8 +69,10 @@ jobs:
       - name: Move java artifact to target folder 
         shell: bash
         run: |
+          ls -al 
           mkdir target
           mv *.jar target/
+          ls -al
       - name: Download Artifact Version
         uses: actions/download-artifact@v1
         with:
