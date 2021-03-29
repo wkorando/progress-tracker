@@ -22,26 +22,42 @@ jobs:
       run: mvn --batch-mode deploy javadoc:javadoc
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: Upload Java artifact
+    - name: Extract Maven project version
+      shell: bash
+      run: $(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec) > version.txt
+    - name: Upload Target Folder
       uses: actions/upload-artifact@v2
       with:
-        name: java_artifact
+        name: target_folder
         path: target
+    - name: Upload Artifact Version
+      uses: actions/upload-artifact@v2
+      with:
+        name: artifact_version
+        path: metadata/version.txt
   docker:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Download Java artifact
+      - name: Download Target Folder
         uses: actions/download-artifact@v2
         with:
-          name: java_artifact
+          name: target_folder
+      - name: Download metadata
+        uses: actions/download-artifact@v1
+        with:
+          name: artifact_version
+      - name: Create version environment variable
+        shell: bash
+        run: |
+          value=`cat metadata/version.txt`
+  	  echo ::set-output name=version::$value
+        id: project
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
-      - name: Extract Maven project version
-        run: echo ::set-output name=version::$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
-        id: project
+
       - name: Login to Docker Hub
         uses: docker/login-action@v1 
         with:
