@@ -24,17 +24,17 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Extract Maven project version
       shell: bash
-      run: mkdir metadata; echo $(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec) > metadata/version.txt
+      run: echo $(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec) > version.txt
     - name: Upload Target Folder
       uses: actions/upload-artifact@v2
       with:
-        name: target_folder
+        name: target
         path: target
     - name: Upload Artifact Version
       uses: actions/upload-artifact@v2
       with:
-        name: artifact_version
-        path: metadata/version.txt
+        name: metadata
+        path: version.txt
   docker:
     needs: build
     runs-on: ubuntu-latest
@@ -42,11 +42,11 @@ jobs:
       - name: Download Target Folder
         uses: actions/download-artifact@v2
         with:
-          name: target_folder
+          name: target
       - name: Download Artifact Version
         uses: actions/download-artifact@v1
         with:
-          name: artifact_version
+          name: metadata
       - name: Create version environment variable
         shell: bash
         run: |
