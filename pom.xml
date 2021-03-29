@@ -142,7 +142,7 @@
 							<attributes>
 								<snippets>${snippetsDirectory}</snippets>
 							</attributes>
-							<sourceDirectory>src/main/asciidoc</sourceDirectory>
+							<sourceDirectory>src/main/asciidocs</sourceDirectory>
 							<outputDirectory>target/generated-docs</outputDirectory>
 						</configuration>
 					</execution>
@@ -162,7 +162,7 @@
 		<repository>
 			<id>github</id>
 			<name>GitHub OWNER Apache Maven Packages</name>
-			<url>https://maven.pkg.github.com/wkorando/${artifactId}</url>
+			<url>https://maven.pkg.github.com/wkorando/${project.artifactId}</url>
 		</repository>
 	</distributionManagement>
 </project>

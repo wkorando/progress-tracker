@@ -23,8 +23,8 @@ JVM args:
 --spring.datasource.url=jdbc:oracle:thin:@[connection_name]?TNS_ADMIN=[walletLocation]
 ```
 
-Configuring SSL: 
-https://dzone.com/articles/spring-boot-secured-by-lets-encrypt
+Configuring SSL with Let's Encrypt: 
+[https://dzone.com/articles/spring-boot-secured-by-lets-encrypt](https://dzone.com/articles/spring-boot-secured-by-lets-encrypt)
 
 #### Database Setup and Configuration
 
