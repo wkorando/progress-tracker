@@ -47,14 +47,11 @@ DDL for creating tables available under the [database folder](database/progress-
 
 ### Client Side
 
-The tracking endpoint resides at `GET:/p/{labId}/{stepId}` and returns a 1x1 white pixel PNG file. 
-
-* `labId`: Should be human readable lab id. Example: if you have a workshop for deploying Java applications on Kubernetes, a lab id could be: `java-on-k8s`
-* `stepId`: The step within the lab the user is on. Recommend this be a numeric value, but is handled as a `String`. 
-
-Application does require cookies to be enabled. A JSessionID is generated and stored as a means of correlating requests from a user during a session. 
+For information on sending data check the REST documentation [here](https://htmlpreview.github.io/?https://github.com/wkorando/progress-tracker/blob/main/docs/rest-docs/generated-docs/index.html).
 
 ### Viewing Tracking Data
+
+Several tables for rendering stored data are available at the root of the deployed application.
 
 For instructions on doing this yourself [see this baeldung guide](https://www.baeldung.com/spring-boot-crud-thymeleaf)
 

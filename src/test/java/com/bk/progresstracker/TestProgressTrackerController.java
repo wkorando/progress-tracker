@@ -55,9 +55,9 @@ public class TestProgressTrackerController {
 
 		mockMvc.perform(RestDocumentationRequestBuilders.get("/p/{labId}/{stepId}", "testId", "1"))//
 				.andDo(document("send-tracking-data", pathParameters(
-						parameterWithName("labId").description("String value for identifying a lab."),
+						parameterWithName("labId").description("Should be human readable lab id. Example: if you have a workshop for deploying Java applications on Kubernetes, a lab id could be: `java-on-k8s`"),
 						parameterWithName("stepId").description(
-								"String value for identifying the step within the lab the attendee is currently on."))))
+								"The step within the lab the user is on. Recommend this be a numeric value, but is stored as a String."))))
 				.andExpect(status().isOk())//
 				.andExpect(content().contentType(MediaType.IMAGE_PNG))//
 				.andReturn();

@@ -9,6 +9,8 @@ Billy Korando;
 
 Pixel tracking application. Workshop can make requests to track a user's progress through a multi-step workshop.
 
+Application does require cookies to be enabled. A JSessionID is generated and stored as a cookie a way of correlating requests from a user during a session.
+
 [[resources-tag-retrieve]]
 == Send Tracking Data
 
