@@ -51,7 +51,7 @@ jobs:
         shell: bash
         run: |
           value=`cat metadata/version.txt`
-  	  echo ::set-output name=version::$value
+          echo ::set-output name=version::$value
         id: project
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
