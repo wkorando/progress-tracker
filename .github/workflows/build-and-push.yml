@@ -76,8 +76,8 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/progress-tracker:latest,${{ secrets.DOCKERHUB_USERNAME }}/progress-tracker:${{ steps.project.outputs.version }}
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
-  docs:
-    needs: add-generated-documentation
+  add-generated-documentation:
+    needs: docker
     runs-on: ubuntu-latest
     steps:
       - name: Download Target Folder
