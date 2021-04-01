@@ -47,11 +47,11 @@ DDL for creating tables available under the [database folder](database/progress-
 
 ### Client Side
 
-For information on sending data check the REST documentation [here](https://htmlpreview.github.io/?https://raw.githubusercontent.com/wkorando/progress-tracker/main/docs/rest-docs/index.html).
+For information on sending data check the REST documentation [here](https://wkorando.github.io/progress-tracker/rest-docs/).
 
 ### JavaDoc
 
-Javadoc for the application can be found here: 
+Javadoc for the application can be found [here](https://wkorando.github.io/progress-tracker/javadoc/).
 
 ### Viewing Tracking Data
 

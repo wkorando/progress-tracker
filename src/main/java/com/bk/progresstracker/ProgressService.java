@@ -26,6 +26,13 @@ public class ProgressService {
 
 	}
 
+	/**
+	 * Creates a new {@code com.bk.progresstracker.ProgressData}
+	 * @param labId
+	 * @param stepId
+	 * @param sessionId
+	 * @param jsonData
+	 */
 	public void saveTrackingInfo(String labId, String stepId, String sessionId, ObjectNode jsonData) {
 		ProgressData data = new ProgressData(labId, stepId, sessionId, jsonData.toString());
 		progressRepo.save(data);
