@@ -87,6 +87,7 @@ jobs:
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
   publish-docs:
+    needs: build
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
