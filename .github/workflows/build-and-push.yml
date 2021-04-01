@@ -93,20 +93,13 @@ jobs:
       with:
         persist-credentials: false 
         fetch-depth: 0 
-    - name: Setup JDK 16
-      uses: actions/setup-java@v1
+        ref: generated-docs
+    - name: Download Artifact Version
+      uses: actions/download-artifact@v1
       with:
-        java-version: 16
-    - name: Build with Maven
-      run: mvn --batch-mode deploy javadoc:javadoc
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        name: generated-docs
     - name: Move generated docs into repo
       run: |
-        rm -rf docs
-        mkdir docs
-        mv -f target/generated-docs docs/rest-docs
-        mv -f target/site/apidocs docs/javadoc
         git add .
     - name: Commit files
       run: |
@@ -117,17 +110,4 @@ jobs:
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: ${{ github.ref }}
-    - name: Extract Maven project version
-      shell: bash
-      run: echo $(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec) > version.txt
-    - name: Upload Java artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: java_artifact
-        path: target/*.jar
-    - name: Upload artifact version
-      uses: actions/upload-artifact@v2
-      with:
-        name: metadata
-        path: version.txt
+        branch: generated-docs
