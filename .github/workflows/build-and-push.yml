@@ -101,6 +101,8 @@ jobs:
         name: generated-docs
     - name: Move generated docs into repo
       run: |
+        cp -rl generated-docs/* .
+        rm -rf generated-docs
         git add .
     - name: Commit files
       run: |
