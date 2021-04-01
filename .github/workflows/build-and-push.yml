@@ -33,7 +33,6 @@ jobs:
         mkdir generated-docs
         mv -f target/generated-docs generated-docs/rest-docs
         mv -f target/site/apidocs generated-docs/javadoc
-        git add .
     - name: Extract Maven project version
       shell: bash
       run: echo $(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec) > version.txt
@@ -50,8 +49,8 @@ jobs:
     - name: Upload generated docs
       uses: actions/upload-artifact@v2
       with:
-        name: metadata
-        path: version.txt
+        name: generated-docs
+        path: generated-docs
   docker:
     needs: build
     runs-on: ubuntu-latest
