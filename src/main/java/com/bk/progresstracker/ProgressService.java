@@ -27,7 +27,7 @@ public class ProgressService {
 	}
 
 	/**
-	 * Creates a new {@code com.bk.progresstracker.ProgressData}
+	 * Creates a new {@code com.bk.progresstracker.ProgressData} and sends it to 
 	 * @param labId
 	 * @param stepId
 	 * @param sessionId

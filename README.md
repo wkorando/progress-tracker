@@ -23,6 +23,9 @@ JVM args:
 --spring.datasource.url=jdbc:oracle:thin:@[connection_name]?TNS_ADMIN=[walletLocation]
 ```
 
+Java artifact: https://github.com/wkorando/progress-tracker/packages/688075
+Docker `docker push wkorando/progress-tracker:latest`
+
 Configuring SSL with Let's Encrypt: 
 [https://dzone.com/articles/spring-boot-secured-by-lets-encrypt](https://dzone.com/articles/spring-boot-secured-by-lets-encrypt)
 
@@ -51,7 +54,7 @@ For information on sending data check the REST documentation [here](https://wkor
 
 ### JavaDoc
 
-Javadoc for the application can be found [here](https://wkorando.github.io/progress-tracker/javadoc/).
+JavaDocs for the application can be found [here](https://wkorando.github.io/progress-tracker/javadoc/).
 
 ### Viewing Tracking Data
 
